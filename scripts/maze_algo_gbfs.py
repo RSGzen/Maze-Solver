@@ -5,18 +5,22 @@ def gbfs(grid, start, keys, end):
     def get_neighbors(index):
         neighbors = []
         x, y = grid.checkCellXandYIndex(index)
+        # print(f"Getting neighbors for index {index} at coordinates ({x}, {y})")
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             nx, ny = x + dx, y + dy
             if 0 <= nx < grid.num_cols and 0 <= ny < grid.num_rows:
                 neighbor_index = grid.checkCellArrayIndex(nx, ny)
                 if not grid.cell_array[neighbor_index].wall:  # Check if not a wall
                     neighbors.append(neighbor_index)
+        # print(f"Neighbors: {neighbors}")
         return neighbors
 
     def heuristic(index, goal):
         x1, y1 = grid.checkCellXandYIndex(index)
         x2, y2 = grid.checkCellXandYIndex(goal)
-        return abs(x1 - x2) + abs(y1 - y2)
+        h = abs(x1 - x2) + abs(y1 - y2)
+        # print(f"Heuristic from {index} to {goal} is {h}")
+        return h
 
     def gbfs_single_source(start, goal):
         visited = set()
@@ -26,7 +30,7 @@ def gbfs(grid, start, keys, end):
         cost[start] = 0
 
         while pq:
-            current_index = heapq.heappop(pq)
+            current_priority, current_index = heapq.heappop(pq)
             if current_index in visited:
                 continue
             visited.add(current_index)
@@ -38,8 +42,11 @@ def gbfs(grid, start, keys, end):
                     new_cost = cost[current_index] + 1 + additional_cost
                     if new_cost < cost[neighbor]:
                         cost[neighbor] = new_cost
-                        heapq.heappush(pq, (heuristic(neighbor, goal) + new_cost, neighbor))
+                        heapq.heappush(pq, (heuristic(neighbor, goal), neighbor))
                         prev[neighbor] = current_index
+        # print(f"Visited: {visited}")
+        # print(f"Prev: {prev}")
+        # print(f"Cost: {cost}")
         return prev, cost
 
     def reconstruct_path(prev, start, goal):
@@ -49,9 +56,16 @@ def gbfs(grid, start, keys, end):
             path.append(at)
             at = prev[at]
         path.reverse()
+        # print(f"Reconstructed path: {path}")
         return path
 
     def find_shortest_path_through_keys(start, keys, end):
+        if not keys:
+            # If no keys, find the direct shortest path from start to end
+            prev_from_start, cost_from_start = gbfs_single_source(start, end)
+            path = reconstruct_path(prev_from_start, start, end)
+            return path, cost_from_start[end]
+
         best_order = None
         best_distance = float('inf')
         best_path = []
@@ -63,7 +77,7 @@ def gbfs(grid, start, keys, end):
 
             for key in order:
                 prev, cost = gbfs_single_source(current_start, key)
-                if prev[key] is None:
+                if cost[key] == float('inf'):
                     break
                 segment_path = reconstruct_path(prev, current_start, key)
                 full_path.extend(segment_path[:-1])  # Add all but the last to avoid duplication
@@ -72,7 +86,7 @@ def gbfs(grid, start, keys, end):
             
             # Handle the final segment to the end point
             prev, cost = gbfs_single_source(current_start, end)
-            if prev[end] is None:
+            if cost[end] == float('inf'):
                 continue
             segment_path = reconstruct_path(prev, current_start, end)
             full_path.extend(segment_path)
@@ -89,8 +103,9 @@ def gbfs(grid, start, keys, end):
 
     if path:
         grid.agent_position = path[-1]
-        print(path)
         coordinate = [grid.checkCellXandYIndex(index) for index in path]
-        print(coordinate)
+    else:
+        coordinate = []
 
-    return path, path_cost
+    # print(f"Final path: {path}, Path cost: {path_cost}") 
+    return coordinate, path_cost

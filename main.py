@@ -210,7 +210,7 @@ def start():
                 drawText("REACHED MAX KEY", getFont(24), "Red", (790,475), screen)
             
             if time_taken != None:
-                time_taken = round(time_taken, 4)
+                time_taken = round(time_taken, 5)
                 TIME_TAKEN_TEXT = str(time_taken)
                 drawText(TIME_TAKEN_TEXT, getFont(24), "Green", (1050,550), screen)
 
