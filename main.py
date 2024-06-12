@@ -1,5 +1,5 @@
 import pygame #egiuhwroijwgweoih
-import time
+import time 
 import sys
 from scripts.maze_button import Button
 from scripts.maze_grid import Grid
@@ -8,7 +8,7 @@ from scripts.maze_algorithm import search_algo
 from scripts.maze_algo_dijkstra import dijkstra
 from scripts.maze_algo_gbfs import gbfs
 
-pygame.init()
+pygame.init() #initialize the pygame library
 
 SCREEN_WIDTH = 1250
 SCREEN_HEIGHT = 850
