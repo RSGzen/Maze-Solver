@@ -5,7 +5,7 @@ def dijkstra(grid, start, keys, end):
     def get_neighbors(index):
         # Define a function to get neighboring cells of a given index
         neighbors = []
-        x, y = grid.checkCellXandYIndex(index)  
+        x, y = grid.checkCellXandYIndex(index)
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             nx, ny = x + dx, y + dy
             if 0 <= nx < grid.num_cols and 0 <= ny < grid.num_rows:
@@ -30,7 +30,7 @@ def dijkstra(grid, start, keys, end):
                 if distance < distances[neighbor]:
                     distances[neighbor] = distance
                     prev[neighbor] = current_index
-                    heapq.heappush(pq, (distance, neighbor))
+                    heapq.heappush(pq, (distance, neighbor)) 
         return distances, prev
 
     def reconstruct_path(prev, start, goal):
@@ -44,6 +44,12 @@ def dijkstra(grid, start, keys, end):
         return path
 
     def find_shortest_path_through_keys(start, keys, end):
+        if not keys:
+            # If no keys, find the direct shortest path from start to end
+            distances_from_start, prev_from_start = dijkstra_single_source(start)
+            path = reconstruct_path(prev_from_start, start, end)
+            return path, distances_from_start[end]
+
         # Find the shortest path through a set of keys in a specific order
         distances_from_start, prev_from_start = dijkstra_single_source(start)
         all_distances = {key: dijkstra_single_source(key)[0] for key in keys}
@@ -54,7 +60,7 @@ def dijkstra(grid, start, keys, end):
             total_distance = 0
             total_distance += distances_from_start[order[0]]
             for i in range(len(order) - 1):
-                    total_distance += all_distances[order[i]][order[i + 1]]
+                total_distance += all_distances[order[i]][order[i + 1]]
             total_distance += all_distances[order[-1]][end]
             return total_distance
 
@@ -73,7 +79,7 @@ def dijkstra(grid, start, keys, end):
             path.extend(reconstruct_path(all_prev[best_order[-1]], best_order[-1], end)[1:])
             return path, best_distance
         else:
-            return None
+            return None, float('inf')
 
     # Call the function to find the shortest path through keys
     path, path_cost = find_shortest_path_through_keys(start, keys, end)
@@ -82,4 +88,6 @@ def dijkstra(grid, start, keys, end):
         # Update the grid's agent position if a path is found
         grid.agent_position = path[-1]
         coordinate = [grid.checkCellXandYIndex(index) for index in path]
+    else:
+        coordinate = []
     return coordinate, path_cost
