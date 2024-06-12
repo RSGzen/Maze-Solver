@@ -1,4 +1,4 @@
-import pygame
+import pygame #egiuhwroijwgweoih
 import time
 import sys
 from scripts.maze_button import Button
