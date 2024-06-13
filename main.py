@@ -490,6 +490,9 @@ def guide():
             
             screen.blit(guideBackground2,(0,22))
 
+            GUIDES_NEXT = Button(None,(1000,750),"-->",getFont(75),"White","Dark Green")
+            GUIDES_NEXT.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_NEXT.update(screen)
             GUIDES_PREVIOUS = Button(None,(280,750),'<--',getFont(75),"White","Dark Green")
             GUIDES_PREVIOUS.changeColor(GUIDES_MOUSE_POS)
             GUIDES_PREVIOUS.update(screen)
@@ -507,10 +510,43 @@ def guide():
                             mainMenu()
                         if GUIDES_PREVIOUS.checkForInput(GUIDES_MOUSE_POS):
                             guide()
+                        if GUIDES_NEXT.checkForInput(GUIDES_MOUSE_POS):
+                            page3()
             pygame.display.update()
             
     guides_run = True
 
+    def page3():
+        page3_run = True
+        
+        while page2_run == True:
+            clock.tick(144)
+            GUIDES_MOUSE_POS = pygame.mouse.get_pos()
+            guideBackground3 = pygame.image.load(r"assets\GuideBackground3.png")
+            
+            screen.blit(guideBackground3,(0,22))
+
+            GUIDES_PREVIOUS = Button(None,(280,750),'<--',getFont(75),"White","Dark Green")
+            GUIDES_PREVIOUS.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_PREVIOUS.update(screen)
+            GUIDES_BACK = Button(None,(640, 750), "MENU", getFont(75), "White", "Dark Green")
+            GUIDES_BACK.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_BACK.update(screen)
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        if GUIDES_BACK.checkForInput(GUIDES_MOUSE_POS):
+                            page2()
+                        if GUIDES_NEXT.checkForInput(GUIDES_MOUSE_POS):
+                            page4()
+            pygame.display.update()
+            
+    guides_run = True
+    
     while guides_run == True:
         clock.tick(60)
         GUIDES_MOUSE_POS = pygame.mouse.get_pos()
