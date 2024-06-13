@@ -488,15 +488,15 @@ def guide():
             GUIDES_MOUSE_POS = pygame.mouse.get_pos()
             guideBackground2 = pygame.image.load(r"assets\GuideBackground2.png")
             
-            screen.blit(guideBackground2,(0,22))
+            screen.blit(guideBackground2,(0,20))
 
-            GUIDES_NEXT = Button(None,(1000,750),"-->",getFont(75),"White","Dark Green")
+            GUIDES_NEXT = Button(None,(1000,807),"-->",getFont(75),"White","Dark Green")
             GUIDES_NEXT.changeColor(GUIDES_MOUSE_POS)
             GUIDES_NEXT.update(screen)
-            GUIDES_PREVIOUS = Button(None,(280,750),'<--',getFont(75),"White","Dark Green")
+            GUIDES_PREVIOUS = Button(None,(260,807),'<--',getFont(75),"White","Dark Green")
             GUIDES_PREVIOUS.changeColor(GUIDES_MOUSE_POS)
             GUIDES_PREVIOUS.update(screen)
-            GUIDES_BACK = Button(None,(640, 750), "MENU", getFont(75), "White", "Dark Green")
+            GUIDES_BACK = Button(None,(620, 807), "MENU", getFont(75), "White", "Dark Green")
             GUIDES_BACK.changeColor(GUIDES_MOUSE_POS)
             GUIDES_BACK.update(screen)
             
@@ -519,17 +519,20 @@ def guide():
     def page3():
         page3_run = True
         
-        while page2_run == True:
+        while page3_run == True:
             clock.tick(144)
             GUIDES_MOUSE_POS = pygame.mouse.get_pos()
             guideBackground3 = pygame.image.load(r"assets\GuideBackground3.png")
             
-            screen.blit(guideBackground3,(0,22))
+            screen.blit(guideBackground3,(0,20))
 
-            GUIDES_PREVIOUS = Button(None,(280,750),'<--',getFont(75),"White","Dark Green")
+            GUIDES_NEXT = Button(None,(1000,807),"-->",getFont(75),"White","Dark Green")
+            GUIDES_NEXT.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_NEXT.update(screen)
+            GUIDES_PREVIOUS = Button(None,(260,807),'<--',getFont(75),"White","Dark Green")
             GUIDES_PREVIOUS.changeColor(GUIDES_MOUSE_POS)
             GUIDES_PREVIOUS.update(screen)
-            GUIDES_BACK = Button(None,(640, 750), "MENU", getFont(75), "White", "Dark Green")
+            GUIDES_BACK = Button(None,(620, 807), "MENU", getFont(75), "White", "Dark Green")
             GUIDES_BACK.changeColor(GUIDES_MOUSE_POS)
             GUIDES_BACK.update(screen)
             
@@ -540,9 +543,119 @@ def guide():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         if GUIDES_BACK.checkForInput(GUIDES_MOUSE_POS):
+                            mainMenu()
+                        if GUIDES_PREVIOUS.checkForInput(GUIDES_MOUSE_POS):
                             page2()
                         if GUIDES_NEXT.checkForInput(GUIDES_MOUSE_POS):
                             page4()
+            pygame.display.update()
+            
+    guides_run = True
+    
+    def page4():
+        page4_run = True
+        
+        while page4_run == True:
+            clock.tick(144)
+            GUIDES_MOUSE_POS = pygame.mouse.get_pos()
+            guideBackground4 = pygame.image.load(r"assets\GuideBackground4.png")
+            
+            screen.blit(guideBackground4,(0,20))
+
+            GUIDES_NEXT = Button(None,(1000,807),"-->",getFont(75),"White","Dark Green")
+            GUIDES_NEXT.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_NEXT.update(screen)
+            GUIDES_PREVIOUS = Button(None,(260,807),'<--',getFont(75),"White","Dark Green")
+            GUIDES_PREVIOUS.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_PREVIOUS.update(screen)
+            GUIDES_BACK = Button(None,(620, 807), "MENU", getFont(75), "White", "Dark Green")
+            GUIDES_BACK.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_BACK.update(screen)
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        if GUIDES_BACK.checkForInput(GUIDES_MOUSE_POS):
+                            mainMenu()
+                        if GUIDES_PREVIOUS.checkForInput(GUIDES_MOUSE_POS):
+                            page3()
+                        if GUIDES_NEXT.checkForInput(GUIDES_MOUSE_POS):
+                            page5()
+            pygame.display.update()
+            
+    guides_run = True
+    
+    def page5():
+        page5_run = True
+        
+        while page5_run == True:
+            clock.tick(144)
+            GUIDES_MOUSE_POS = pygame.mouse.get_pos()
+            guideBackground5 = pygame.image.load(r"assets\GuideBackground5.png")
+            
+            screen.blit(guideBackground5,(0,20))
+
+            GUIDES_NEXT = Button(None,(1000,807),"-->",getFont(75),"White","Dark Green")
+            GUIDES_NEXT.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_NEXT.update(screen)
+            GUIDES_PREVIOUS = Button(None,(260,807),'<--',getFont(75),"White","Dark Green")
+            GUIDES_PREVIOUS.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_PREVIOUS.update(screen)
+            GUIDES_BACK = Button(None,(620, 807), "MENU", getFont(75), "White", "Dark Green")
+            GUIDES_BACK.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_BACK.update(screen)
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        if GUIDES_BACK.checkForInput(GUIDES_MOUSE_POS):
+                            mainMenu()
+                        if GUIDES_PREVIOUS.checkForInput(GUIDES_MOUSE_POS):
+                            page4()
+                        if GUIDES_NEXT.checkForInput(GUIDES_MOUSE_POS):
+                            page6()
+            pygame.display.update()
+            
+    guides_run = True
+    
+    def page6():
+        page6_run = True
+        
+        while page6_run == True:
+            clock.tick(144)
+            GUIDES_MOUSE_POS = pygame.mouse.get_pos()
+            guideBackground6 = pygame.image.load(r"assets\GuideBackground6.png")
+            
+            screen.blit(guideBackground6,(0,20))
+
+            GUIDES_PREVIOUS = Button(None,(260,807),'<--',getFont(75),"White","Dark Green")
+            GUIDES_PREVIOUS.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_PREVIOUS.update(screen)
+            GUIDES_BACK = Button(None,(620, 807), "MENU", getFont(75), "White", "Dark Green")
+            GUIDES_BACK.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_BACK.update(screen)
+            GUIDES_START = Button(None,(1020, 807), "START", getFont(75), "White", "Dark Green")
+            GUIDES_START.changeColor(GUIDES_MOUSE_POS)
+            GUIDES_START.update(screen)
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        if GUIDES_BACK.checkForInput(GUIDES_MOUSE_POS):
+                            mainMenu()
+                        if GUIDES_PREVIOUS.checkForInput(GUIDES_MOUSE_POS):
+                            page5()
+                        if GUIDES_START.checkForInput(GUIDES_MOUSE_POS):
+                            start()
             pygame.display.update()
             
     guides_run = True
@@ -553,12 +666,12 @@ def guide():
 
         guideBackground1 = pygame.image.load(r"assets\GuideBackground1.png")
     
-        screen.blit(guideBackground1,(0,22))
+        screen.blit(guideBackground1,(0,20))
 
-        GUIDES_NEXT = Button(None,(1000,750),"-->",getFont(75),"White","Dark Green")
+        GUIDES_NEXT = Button(None,(1000,807),"-->",getFont(75),"White","Dark Green")
         GUIDES_NEXT.changeColor(GUIDES_MOUSE_POS)
         GUIDES_NEXT.update(screen)
-        GUIDES_BACK = Button(None,(640, 750), "MENU", getFont(75), "White", "Dark Green")
+        GUIDES_BACK = Button(None,(620, 807), "MENU", getFont(75), "White", "Dark Green")
         GUIDES_BACK.changeColor(GUIDES_MOUSE_POS)
         GUIDES_BACK.update(screen)
 
