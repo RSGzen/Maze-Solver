@@ -124,7 +124,7 @@ class Grid:
         temp_rect = pygame.Rect(x_coord, y_coord, tile_size, tile_size)
         pygame.draw.rect(screen, color, temp_rect)
 
-    def generateMazeWalls(self, current_idx, historic_frontier, existing_frontier, node_frontier):
+    def generateMazePassage(self, current_idx, historic_frontier, existing_frontier, node_frontier):
         temp_frontier, historic_frontier = self.checkFrontierCells(current_idx, historic_frontier) 
 
         temp_node = FrontierNode(current_idx)
@@ -158,10 +158,10 @@ class Grid:
 
         self.cell_array[current_idx].wall = False
 
-        current_idx, historic_frontier, existing_frontier, node_frontier = self.generateMazeWalls(current_idx, historic_frontier, existing_frontier, node_frontier)
+        current_idx, historic_frontier, existing_frontier, node_frontier = self.generateMazePassage(current_idx, historic_frontier, existing_frontier, node_frontier)
 
         while len(existing_frontier) > 0 :
-            current_idx, historic_frontier, existing_frontier, node_frontier = self.generateMazeWalls(current_idx, historic_frontier, existing_frontier, node_frontier)
+            current_idx, historic_frontier, existing_frontier, node_frontier = self.generateMazePassage(current_idx, historic_frontier, existing_frontier, node_frontier)
 
     def drawMazeGeneration(self, screen, border_coords):
         for cell in self.cell_array:
